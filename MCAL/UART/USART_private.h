@@ -35,4 +35,11 @@
 #define UCSRC_UCSZ0       1
 
 #define UBBRH_URSEL       7      //To select access to UBRRH
+
+/*************************Private macros***************************/
+#define IDLE              1
+#define STRING            2
+#define CHAR              3
+
+
 #endif /* USART_PRIVATE_H_ */

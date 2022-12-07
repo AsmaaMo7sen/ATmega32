@@ -54,15 +54,64 @@ typedef struct
 	u8 Mode     ;            //synchronous or asynchronous mode
 	u8 Parity   ;            //no parity or even or odd parity bit
 	u8 StopBits ;            //either 1 or 2 bits
-	u8 Interrupt;            //transmission or receive interrupt enabled or disabled
 }USART_t;
 
 /********************************************************************************************************/
 /****************************************Functions' prototypes*******************************************/
 /********************************************************************************************************/
 
+/*Description :  This function is to initialize USART peripheral			 */
+/*Input       :  Pointer to struct setting initialization characterestics    */
+/*Return      :  Error indicator											 */
+/*Config      :  Post build configuration									 */
 u8 USART_u8Init(USART_t * Copy_pxUart);
 
-void USART_voidSent(u16 Copy_u16Data);
-u16 USART_u16Receive();
+/*Description :  This function is to send a character synchronously			 */
+/*Input       :  Character to be sent									     */
+/*Return      :  void														 */
+void USART_voidSendCharSync(u8 Copy_u8Data);
+
+
+/*Description :  This function is to send a character asynchronously		 */
+/*Input       :  Character to be sent									     */
+/*            :  Pointer to notification function							 */
+/*Return      :  Error indicator											 */
+u8 USART_u8SendCharAsync(u8 Copy_u8Data , void(*CopyPtrToFunc)(void));
+
+
+/*Description :  This function is to receive a character synchronously		 */
+/*Input       :  void													     */
+/*Return      :  Received character											 */
+u8 USART_u8ReceiveCharSync(void);
+
+/*Description :  This function is to receive a character asynchronously      */
+/*Input       :  Pointer to assign received char						     */
+/*            :  Pointer to notification function							 */
+/*Return      :  Error indicator											 */
+u8 USART_u8ReceiveCharAsync(u8 * Copy_pu8ReceivedData , void(*CopyPtrToFunc)(void) );
+
+/*Description :  This function is to send a string synchronously		     */
+/*Input       :  Pointer to string to be sent							     */
+/*Return      :  void													     */
+void USART_voidSendStringSync(char * Copy_pcharSentString);
+
+/*Description :  This function is to send a string asynchronously		     */
+/*Input       :  Pointer to string to be sent							     */
+/*            :  Pointer to notification function							 */
+/*Return      :  Error indicator											 */
+u8 USART_u8SendStringAsync(char * Copy_pcharSentString , void(*CopyPtrToFunc)(void) );
+
+/*Description :  This function is to receive a string synchronously		     */
+/*Input       :  Pointer to string to be received						     */
+/*            :  Buffer(String) size										 */
+/*Return      :  Error indicator											 */
+void USART_voidReceiveBufferSync(char * Copy_pcharReceivedBuffer , u8 Copy_u8BufferSize);
+
+/*Description :  This function is to disable all interrupt sources		     */
+/*Input       :  void													     */
+/*Return      :  void													     */
+void USART_voidDisableInterrupt(void);
+
+
+
 #endif /* USART_INTERFACE_H_ */
